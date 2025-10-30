@@ -3,19 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import './PricingPage.css';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+// YOUR ACTUAL PUBLISHABLE KEY
+const stripePromise = loadStripe('pk_test_51SNLGxPCIRVSkbgXmz2sSMbMoHt7rxvEZ5FIGkSmj0Bn7y1fLHJg6jXVUX2XdACTht0qGQpk0NC65x07WkZJxT5r003qIQg1rS');
 
 const PricingPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // Real Stripe price IDs (you'll get these from Stripe dashboard)
+  // YOUR ACTUAL STRIPE PRICE IDs
   const plans = [
     {
       id: 'free',
       name: 'FREE',
       price: 0,
-      stripePriceId: null, // Free plan doesn't need Stripe
+      stripePriceId: null,
       description: 'For teams getting started',
       features: [
         '100 Opportunities per month',
@@ -29,7 +30,7 @@ const PricingPage = () => {
       id: 'premium', 
       name: 'PREMIUM',
       price: 49,
-      stripePriceId: 'price_premium_monthly', // Your actual Stripe price ID
+      stripePriceId: 'price_1SNLfYPCIRVSkbgXIOsNQQud', // YOUR 1ST PRICE ID
       description: 'For growing teams',
       features: [
         'Unlimited Opportunities',
@@ -45,7 +46,7 @@ const PricingPage = () => {
       id: 'enterprise',
       name: 'ENTERPRISE', 
       price: 149,
-      stripePriceId: 'price_enterprise_monthly', // Your actual Stripe price ID
+      stripePriceId: 'price_1SNLgaPCIRVSkbgX8Td18e6H', // YOUR 2ND PRICE ID
       description: 'For scaling businesses',
       features: [
         'Everything in Premium',
@@ -61,8 +62,8 @@ const PricingPage = () => {
 
   const handleSubscribe = async (plan) => {
     if (plan.price === 0) {
-      // Free plan - just redirect to signup
-      navigate('/signup?plan=free');
+      // Free plan - redirect to dashboard
+      navigate('/');
       return;
     }
 
@@ -72,7 +73,7 @@ const PricingPage = () => {
       const stripe = await stripePromise;
       
       // Call your backend to create checkout session
-      const response = await fetch('/api/payments/create-checkout-session', {
+      const response = await fetch('http://localhost:5000/api/payments/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +132,7 @@ const PricingPage = () => {
             </ul>
 
             <button 
-              className={`subscribe-btn ${loading ? 'loading' : ''}`}
+              className={`subscribe-btn ${plan.id === 'premium' ? 'popular' : ''} ${loading ? 'loading' : ''}`}
               onClick={() => handleSubscribe(plan)}
               disabled={loading}
             >
