@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const navigate = useNavigate(); // Add this hook
+
   const userPlan = {
     name: 'FREE',
     price: 0,
@@ -11,15 +14,13 @@ const Dashboard = () => {
     usedPrimeMatches: 2
   };
 
-  // FIXED: Add button functionality
+  // FIXED: Now actually navigates to pages
   const handleUpgrade = () => {
-    alert('Redirecting to upgrade plans...');
-    // In real app: window.location.href = '/pricing';
+    navigate('/pricing'); // Goes to pricing page
   };
 
   const handleFindOpportunities = () => {
-    alert('Opening opportunity finder...');
-    // In real app: window.location.href = '/opportunities';
+    navigate('/opportunities'); // Goes to opportunities page
   };
 
   const displayPrice = (price) => {
@@ -53,7 +54,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* FIXED: Button now works */}
+        {/* FIXED: Now actually navigates to pricing page */}
         <button className="upgrade-button" onClick={handleUpgrade}>
           Upgrade Plan
         </button>
@@ -62,13 +63,12 @@ const Dashboard = () => {
       <div className="quick-actions">
         <h2>Quick Actions</h2>
         <div className="actions-grid">
-          {/* FIXED: Button now works */}
+          {/* FIXED: Now actually navigates to opportunities page */}
           <div className="action-card" onClick={handleFindOpportunities}>
             <h3>Find Opportunities</h3>
             <p>Discover new government contracts</p>
           </div>
           
-          {/* Add more action cards as needed */}
           <div className="action-card" onClick={() => alert('AI Prime Matching coming soon!')}>
             <h3>AI Prime Matching</h3>
             <p>Find prime contractors</p>
