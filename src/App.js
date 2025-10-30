@@ -20,3 +20,4 @@ function App() {
 }
 
 export default App;
+<Route path="/ai-matching" element={<AIPrimeMatching />} />
