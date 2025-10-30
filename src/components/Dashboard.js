@@ -22,9 +22,9 @@ const Dashboard = () => {
     navigate('/opportunities');
   };
 
-  // FIXED: AI Prime Matching and CRM show "Coming Soon"
+  // CHANGED: Now navigates to real AI Matching page
   const handleAIPrimeMatching = () => {
-    alert('AI Prime Matching feature coming soon!');
+    navigate('/ai-matching');
   };
 
   const handleCRMContacts = () => {
@@ -75,13 +75,12 @@ const Dashboard = () => {
             <p>Discover new government contracts</p>
           </div>
           
-          {/* FIXED: Now shows "Coming Soon" */}
+          {/* CHANGED: Now goes to real AI Matching page */}
           <div className="action-card" onClick={handleAIPrimeMatching}>
             <h3>AI Prime Matching</h3>
             <p>Find prime contractors</p>
           </div>
           
-          {/* FIXED: Now shows "Coming Soon" */}
           <div className="action-card" onClick={handleCRMContacts}>
             <h3>CRM & Contacts</h3>
             <p>Manage your relationships</p>
