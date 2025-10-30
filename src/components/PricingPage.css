@@ -79,6 +79,25 @@
   border-bottom: none;
 }
 
+/* Back Button Styles */
+.back-button {
+  background: transparent !important;
+  border: 1px solid #4299e1 !important;
+  color: #4299e1 !important;
+  padding: 10px 20px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  margin-bottom: 20px !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.back-button:hover {
+  background: #4299e1 !important;
+  color: white !important;
+}
+
+/* Subscribe Button Styles */
 .subscribe-btn {
   width: 100%;
   padding: 14px 20px;
@@ -94,8 +113,24 @@
 
 .subscribe-btn:hover {
   background: #3182ce;
+  transform: translateY(-2px);
 }
 
+/* Make the premium plan stand out */
+.pricing-card:nth-child(2) {
+  border-color: #4299e1;
+  transform: scale(1.05);
+}
+
+.pricing-card:nth-child(2) .subscribe-btn {
+  background: #2b6cb0;
+}
+
+.pricing-card:nth-child(2) .subscribe-btn:hover {
+  background: #2c5282;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .pricing-plans {
     grid-template-columns: 1fr;
@@ -103,5 +138,13 @@
   
   .pricing-container {
     padding: 20px 16px;
+  }
+  
+  .pricing-card:nth-child(2) {
+    transform: none;
+  }
+  
+  .pricing-header h1 {
+    font-size: 2rem;
   }
 }
