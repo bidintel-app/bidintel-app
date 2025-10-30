@@ -117,3 +117,56 @@
     max-width: 100%;
   }
 }
+.back-button {
+  background: transparent !important;
+  border: 1px solid #4299e1 !important;
+  color: #4299e1 !important;
+  padding: 10px 20px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  margin-bottom: 20px !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.back-button:hover {
+  background: #4299e1 !important;
+  color: white !important;
+}
+
+/* Ensure search button works with new functionality */
+.search-btn {
+  padding: 12px 24px;
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-btn:hover {
+  background: #3182ce;
+  transform: translateY(-1px);
+}
+
+/* Ensure view details button works */
+.view-details-btn {
+  padding: 8px 16px;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+}
+
+.view-details-btn:hover {
+  background: #38a169;
+  transform: translateY(-1px);
+}
