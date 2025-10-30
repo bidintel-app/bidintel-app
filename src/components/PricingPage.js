@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PricingPage.css';
 
 const PricingPage = () => {
+  const navigate = useNavigate();
+
   const plans = [
     {
       id: 'free',
@@ -45,8 +48,28 @@ const PricingPage = () => {
     }
   ];
 
+  const handleSubscribe = (planId) => {
+    if (planId === 'free') {
+      alert('Free plan activated! Redirecting to dashboard...');
+      navigate('/');
+    } else {
+      alert(`Starting subscription process for ${planId.toUpperCase()} plan...`);
+    }
+  };
+
+  const handleBackToDashboard = () => {
+    navigate('/');
+  };
+
   return (
     <div className="pricing-container">
+      <button 
+        onClick={handleBackToDashboard}
+        className="back-button"
+      >
+        ← Back to Dashboard
+      </button>
+
       <div className="pricing-header">
         <h1>Choose Your Plan</h1>
         <p>Scale your government contracting business</p>
@@ -69,7 +92,10 @@ const PricingPage = () => {
               ))}
             </ul>
 
-            <button className="subscribe-btn">
+            <button 
+              className="subscribe-btn"
+              onClick={() => handleSubscribe(plan.id)}
+            >
               {plan.price === 0 ? 'Get Started' : 'Subscribe Now'}
             </button>
           </div>
