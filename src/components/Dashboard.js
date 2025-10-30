@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const navigate = useNavigate(); // Add this hook
+  const navigate = useNavigate();
 
   const userPlan = {
     name: 'FREE',
@@ -14,13 +14,21 @@ const Dashboard = () => {
     usedPrimeMatches: 2
   };
 
-  // FIXED: Now actually navigates to pages
   const handleUpgrade = () => {
-    navigate('/pricing'); // Goes to pricing page
+    navigate('/pricing');
   };
 
   const handleFindOpportunities = () => {
-    navigate('/opportunities'); // Goes to opportunities page
+    navigate('/opportunities');
+  };
+
+  // FIXED: AI Prime Matching and CRM show "Coming Soon"
+  const handleAIPrimeMatching = () => {
+    alert('AI Prime Matching feature coming soon!');
+  };
+
+  const handleCRMContacts = () => {
+    alert('CRM & Contacts feature coming soon!');
   };
 
   const displayPrice = (price) => {
@@ -54,7 +62,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* FIXED: Now actually navigates to pricing page */}
         <button className="upgrade-button" onClick={handleUpgrade}>
           Upgrade Plan
         </button>
@@ -63,18 +70,19 @@ const Dashboard = () => {
       <div className="quick-actions">
         <h2>Quick Actions</h2>
         <div className="actions-grid">
-          {/* FIXED: Now actually navigates to opportunities page */}
           <div className="action-card" onClick={handleFindOpportunities}>
             <h3>Find Opportunities</h3>
             <p>Discover new government contracts</p>
           </div>
           
-          <div className="action-card" onClick={() => alert('AI Prime Matching coming soon!')}>
+          {/* FIXED: Now shows "Coming Soon" */}
+          <div className="action-card" onClick={handleAIPrimeMatching}>
             <h3>AI Prime Matching</h3>
             <p>Find prime contractors</p>
           </div>
           
-          <div className="action-card" onClick={() => alert('CRM & Contacts coming soon!')}>
+          {/* FIXED: Now shows "Coming Soon" */}
+          <div className="action-card" onClick={handleCRMContacts}>
             <h3>CRM & Contacts</h3>
             <p>Manage your relationships</p>
           </div>
