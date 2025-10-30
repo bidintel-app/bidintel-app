@@ -2,6 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .pricing-header {
@@ -13,6 +14,12 @@
   font-size: 2.5rem;
   color: #1a202c;
   margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.pricing-header p {
+  font-size: 1.25rem;
+  color: #718096;
 }
 
 .pricing-plans {
@@ -27,12 +34,20 @@
   border-radius: 12px;
   padding: 30px;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+  border-color: #4299e1;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .plan-header h3 {
   font-size: 1.5rem;
   color: #2d3748;
   margin-bottom: 16px;
+  font-weight: 600;
 }
 
 .price {
@@ -40,6 +55,11 @@
   font-weight: 700;
   color: #1a202c;
   margin-bottom: 8px;
+}
+
+.plan-header p {
+  color: #718096;
+  margin-bottom: 20px;
 }
 
 .features-list {
@@ -52,6 +72,11 @@
 .features-list li {
   padding: 8px 0;
   border-bottom: 1px solid #edf2f7;
+  color: #4a5568;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
 }
 
 .subscribe-btn {
@@ -64,4 +89,19 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.subscribe-btn:hover {
+  background: #3182ce;
+}
+
+@media (max-width: 768px) {
+  .pricing-plans {
+    grid-template-columns: 1fr;
+  }
+  
+  .pricing-container {
+    padding: 20px 16px;
+  }
 }
