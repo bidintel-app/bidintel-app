@@ -3,66 +3,73 @@ import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import './PricingPage.css';
 
-// YOUR ACTUAL PUBLISHABLE KEY
-const stripePromise = loadStripe('pk_test_51SNLGxPCIRVSkbgXmz2sSMbMoHt7rxvEZ5FIGkSmj0Bn7y1fLHJg6jXVUX2XdACTht0qGQpk0NC65x07WkZJxT5r003qIQg1rS');
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
 
 const PricingPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // YOUR ACTUAL STRIPE PRICE IDs
   const plans = [
     {
       id: 'free',
       name: 'FREE',
       price: 0,
       stripePriceId: null,
-      description: 'For teams getting started',
+      description: 'Perfect for getting started',
       features: [
         '100 Opportunities per month',
+        'Basic NAICS code filtering',
+        'View subcontractor directory',
         '5 Prime Matches',
-        '10 CRM Contacts', 
-        'Basic search filters',
-        '30-day history'
+        '30-day opportunity history',
+        'Standard search filters'
+      ],
+      limitations: [
+        'Limited to 3 NAICS codes',
+        'View-only subcontractor access'
       ]
     },
     {
       id: 'premium', 
       name: 'PREMIUM',
       price: 49,
-      stripePriceId: 'price_1SNLfYPCIRVSkbgXIOsNQQud', // YOUR 1ST PRICE ID
-      description: 'For growing teams',
+      stripePriceId: 'price_1SNLfYPCIRVSkbgXIOsNQQud',
+      description: 'For growing contracting businesses',
       features: [
         'Unlimited Opportunities',
+        'Advanced NAICS + designation filters',
+        'Contact subcontractors directly',
         '50 Prime Matches/month',
-        '500 CRM Contacts',
-        'Advanced search & filters',
-        'Email alerts',
-        '1-year history',
-        'Priority support'
-      ]
+        '1-year opportunity history',
+        'Bid matching alerts',
+        'Email notifications',
+        'Priority support',
+        'Historical data insights'
+      ],
+      popular: true
     },
     {
       id: 'enterprise',
       name: 'ENTERPRISE', 
       price: 149,
-      stripePriceId: 'price_1SNLgaPCIRVSkbgX8Td18e6H', // YOUR 2ND PRICE ID
-      description: 'For scaling businesses',
+      stripePriceId: 'price_1SNLgaPCIRVSkbgX8Td18e6H',
+      description: 'For established government contractors',
       features: [
         'Everything in Premium',
-        'Unlimited Prime Matches', 
-        'Unlimited CRM Contacts',
-        'API access',
-        'Custom reporting',
+        'Unlimited Prime Matches',
+        'API access for integration',
+        'Custom reporting & analytics',
         'Dedicated account manager',
-        'Phone support'
+        'Phone support',
+        'Training sessions',
+        'Custom NAICS code setup',
+        'Advanced subcontractor matching'
       ]
     }
   ];
 
   const handleSubscribe = async (plan) => {
     if (plan.price === 0) {
-      // Free plan - redirect to dashboard
       navigate('/');
       return;
     }
@@ -72,8 +79,7 @@ const PricingPage = () => {
     try {
       const stripe = await stripePromise;
       
-      // Call your backend to create checkout session
-      const response = await fetch('http://localhost:5000/api/payments/create-checkout-session', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/payments/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,9 +91,12 @@ const PricingPage = () => {
         }),
       });
 
+      if (!response.ok) {
+        throw new Error('Backend request failed');
+      }
+
       const { sessionId } = await response.json();
 
-      // Redirect to Stripe Checkout
       const result = await stripe.redirectToCheckout({
         sessionId,
       });
@@ -111,12 +120,14 @@ const PricingPage = () => {
 
       <div className="pricing-header">
         <h1>Choose Your Plan</h1>
-        <p>Scale your government contracting business</p>
+        <p>Scale your government contracting business with powerful tools</p>
       </div>
 
       <div className="pricing-plans">
         {plans.map((plan) => (
-          <div key={plan.id} className="pricing-card">
+          <div key={plan.id} className={`pricing-card ${plan.popular ? 'popular' : ''}`}>
+            {plan.popular && <div className="popular-badge">MOST POPULAR</div>}
+            
             <div className="plan-header">
               <h3>{plan.name}</h3>
               <div className="price">
@@ -131,8 +142,19 @@ const PricingPage = () => {
               ))}
             </ul>
 
+            {plan.limitations && (
+              <div className="limitations">
+                <strong>Limitations:</strong>
+                <ul>
+                  {plan.limitations.map((limit, index) => (
+                    <li key={index}>• {limit}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <button 
-              className={`subscribe-btn ${plan.id === 'premium' ? 'popular' : ''} ${loading ? 'loading' : ''}`}
+              className={`subscribe-btn ${plan.popular ? 'popular-btn' : ''} ${loading ? 'loading' : ''}`}
               onClick={() => handleSubscribe(plan)}
               disabled={loading}
             >
