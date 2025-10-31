@@ -1,0 +1,89 @@
+.business-profile {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.business-profile h2 {
+  color: #1a202c;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+
+.profile-form {
+  max-width: 600px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-group input[type="text"]:focus {
+  outline: none;
+  border-color: #4299e1;
+}
+
+.naics-selector, .designation-selector {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.naics-option, .designation-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.naics-option:last-child, .designation-option:last-child {
+  border-bottom: none;
+}
+
+.naics-option input, .designation-option input {
+  margin-right: 12px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+}
+
+.checkbox-label input {
+  margin-right: 8px;
+}
+
+.save-profile-btn {
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-profile-btn:hover {
+  background: #3182ce;
+}
