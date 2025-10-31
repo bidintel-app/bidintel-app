@@ -92,3 +92,26 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+// Add this import at the top
+import BusinessProfile from './BusinessProfile';
+
+// Then in your return statement, add the BusinessProfile component:
+return (
+  <div className="dashboard-container">
+    <div className="dashboard-header">
+      <h1>Welcome to BidIntel</h1>
+      <p>Your AI-powered government contracting partner</p>
+    </div>
+
+    {/* ADD THIS NEW SECTION */}
+    <BusinessProfile />
+
+    <div className="plan-overview">
+      {/* ... rest of your existing dashboard code ... */}
+    </div>
+
+    <div className="quick-actions">
+      {/* ... rest of your existing dashboard code ... */}
+    </div>
+  </div>
+);
